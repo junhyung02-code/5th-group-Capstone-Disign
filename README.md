@@ -1,2 +1,2 @@
-# 5th-group-Capstone-Disign
-capstone disign project
+# 5th-group-Capstone-Design
+capstone design project
