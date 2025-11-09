@@ -11,7 +11,7 @@
         android:color="#BDBDBD" />
 
     <!-- 살짝 둥근 모서리 -->
-    <corners android:radius="0dp" />
+    <corners android:radius="12dp" />
 
     <!-- 여백(선 안쪽의 패딩 느낌) -->
     <padding

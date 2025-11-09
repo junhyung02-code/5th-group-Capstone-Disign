@@ -45,7 +45,7 @@
         android:text="입력완료"
         android:textSize="20dp"
         android:textColor="#BDBDBD"
-        android:layout_marginTop="420dp"
+        android:layout_marginTop="400dp"
         android:padding="10dp"
         android:background="@drawable/btn_border"
         android:layout_width="match_parent"

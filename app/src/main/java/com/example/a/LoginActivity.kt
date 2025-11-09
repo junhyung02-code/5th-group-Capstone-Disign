@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 
 class LoginActivity : AppCompatActivity() {
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -41,8 +40,13 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "이메일과 비밀번호를 모두 입력하세요.", Toast.LENGTH_SHORT).show()
             } else {
                 // 간단한 로그인 (테스트용)
-                if (email == "test@example.com" && password == "1234") {
+                if (email == "test@example.com" && password == "123456") {
                     Toast.makeText(this, "로그인 성공!", Toast.LENGTH_SHORT).show()
+
+                    // MainActivity로 이동
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish() // LoginActivity 종료
                 } else {
                     Toast.makeText(this, "이메일 또는 비밀번호가 올바르지 않습니다.", Toast.LENGTH_SHORT).show()
                 }
