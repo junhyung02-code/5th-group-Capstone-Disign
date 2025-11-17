@@ -6,15 +6,26 @@
     android:orientation="vertical"
     android:padding="24dp">
 
+    <!-- 뒤로가기 -->
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:paddingStart="0dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:text="←"
+        android:textColor="#000000"
+        android:textSize="21sp" />
 
     <!-- 상단 제목 영역 -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="0dp"
         android:layout_marginBottom="60dp"
         android:gravity="center_vertical">
+
 
         <!-- 제목 텍스트 -->
         <TextView

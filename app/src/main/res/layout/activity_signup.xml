@@ -10,14 +10,40 @@
     android:background="#FFFFFF"
     tools:context=".SignupActivity">
 
-    <TextView
-        android:text="회원가입"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_gravity="center"
-        android:layout_marginBottom="32dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="32dp">
+
+        <!-- 뒤로가기 -->
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:paddingStart="0dp"
+            android:text="←"
+            android:textColor="#000000"
+            android:textSize="21sp" />
+
+        <!-- 왼쪽 공간 -->
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="0.6" />
+
+        <!-- 회원가입 텍스트 -->
+        <TextView
+            android:text="회원가입"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
     <!-- 이메일 입력 -->
     <TextView
@@ -41,18 +67,19 @@
         android:layout_marginBottom="8dp" />
 
     <!-- 중복확인 버튼 -->
+
+    <!-- 중복확인 상태 표시 -->
     <Button
         android:id="@+id/btnCheckEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="중복확인"
-        android:textSize="18sp"
-        android:textColor="#FFFFFF"
+        android:layout_marginBottom="8dp"
         android:background="@drawable/btn_border_black"
         android:padding="12dp"
-        android:layout_marginBottom="8dp" />
+        android:text="중복확인"
+        android:textColor="#FFFFFF"
+        android:textSize="18sp" />
 
-    <!-- 중복확인 상태 표시 -->
     <TextView
         android:id="@+id/tvEmailStatus"
         android:layout_width="wrap_content"

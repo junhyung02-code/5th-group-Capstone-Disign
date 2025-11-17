@@ -15,6 +15,7 @@ class FindpasswordActivity : AppCompatActivity() {
 
         val etEmail = findViewById<EditText>(R.id.etEmail)
         val btnSendCode = findViewById<Button>(R.id.btnSendCode)
+        val btnBack = findViewById<Button>(R.id.btnBack)
 
         btnSendCode.setOnClickListener {
             val email = etEmail.text.toString().trim()
@@ -30,6 +31,10 @@ class FindpasswordActivity : AppCompatActivity() {
             intent.putExtra("email", email)
             startActivity(intent)
         }
+
+        // 뒤로가기 버튼
+        btnBack.setOnClickListener {
+            finish()
+        }
     }
 }
-

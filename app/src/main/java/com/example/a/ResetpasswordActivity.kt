@@ -15,6 +15,7 @@ class ResetpasswordActivity : AppCompatActivity() {
         val etNewPassword = findViewById<EditText>(R.id.etNewPassword)
         val etConfirmPassword = findViewById<EditText>(R.id.etConfirmPassword)
         val btnComplete = findViewById<Button>(R.id.btnComplete)
+        val btnBack = findViewById<Button>(R.id.btnBack)  // 추가
 
         btnComplete.setOnClickListener {
             val newPw = etNewPassword.text.toString()
@@ -36,6 +37,11 @@ class ResetpasswordActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
+            finish()
+        }
+
+        //뒤로가기 버튼
+        btnBack.setOnClickListener {
             finish()
         }
     }

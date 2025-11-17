@@ -10,14 +10,21 @@ class SigninActivity : AppCompatActivity() {
     private lateinit var btnSignup: Button
     private lateinit var btnGuest: Button
     private lateinit var btnLogin: Button
+    private lateinit var btnBack: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signin)
 
+        btnBack = findViewById(R.id.btnBack)
         btnSignup = findViewById(R.id.btn_signup)
         btnGuest = findViewById(R.id.btn_guest)
         btnLogin = findViewById(R.id.btn_login)
+
+        // 뒤로가기 버튼
+        btnBack.setOnClickListener {
+            finish()  // 이전 액티비티로 돌아감
+        }
 
         // 회원가입 버튼
         btnSignup.setOnClickListener {
@@ -29,7 +36,6 @@ class SigninActivity : AppCompatActivity() {
         btnGuest.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-            finish() // SigninActivity 종료
         }
 
         // 로그인 버튼

@@ -11,9 +11,18 @@ import androidx.appcompat.app.AppCompatActivity
 
 class LoginActivity : AppCompatActivity() {
 
+    private lateinit var btnBack: Button
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+
+        btnBack = findViewById(R.id.btnBack)
+
+        // 뒤로가기 버튼
+        btnBack.setOnClickListener {
+            finish()  // 이전 액티비티로 돌아감
+        }
 
         //  XML의 뷰 연결
         val etEmail = findViewById<EditText>(R.id.etEmail)

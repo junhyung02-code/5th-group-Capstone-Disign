@@ -40,6 +40,5 @@ class LanguageActivity : AppCompatActivity() {
         // SigninActivity로 이동
         val intent = Intent(this, SigninActivity::class.java)
         startActivity(intent)
-        finish() // 현재 액티비티 종료
     }
 }

@@ -8,7 +8,7 @@ import android.text.TextWatcher
 import android.text.Editable
 
 class SignupActivity : AppCompatActivity() {
-
+    private lateinit var btnBack: Button
     private lateinit var etEmail: EditText
     private lateinit var etPassword: EditText
     private lateinit var etPasswordConfirm: EditText
@@ -25,6 +25,7 @@ class SignupActivity : AppCompatActivity() {
         setContentView(R.layout.activity_signup)
 
         // UI 요소 초기화
+        btnBack = findViewById(R.id.btnBack)
         etEmail = findViewById(R.id.etEmail)
         etPassword = findViewById(R.id.etPassword)
         etPasswordConfirm = findViewById(R.id.etPasswordConfirm)
@@ -32,6 +33,11 @@ class SignupActivity : AppCompatActivity() {
         btnSignup = findViewById(R.id.btnSignup)
         tvEmailStatus = findViewById(R.id.tvEmailStatus)
         tvPasswordStatus = findViewById(R.id.tvPasswordStatus)
+
+        // 뒤로가기 버튼
+        btnBack.setOnClickListener {
+            finish()  // 이전 액티비티로 돌아감
+        }
 
         // 중복확인 버튼 클릭
         btnCheckEmail.setOnClickListener {
