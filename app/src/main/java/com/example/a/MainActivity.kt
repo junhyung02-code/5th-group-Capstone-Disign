@@ -3,6 +3,7 @@ package com.example.a
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -12,9 +13,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tabHome: LinearLayout
     private lateinit var tabMap: LinearLayout
     private lateinit var tabConsult: LinearLayout
-    private lateinit var tabSetting: LinearLayout  // ✅ 변수명 일관성
+    private lateinit var tabSetting: LinearLayout  // 변수명 일관성
     private lateinit var btnSymptomInput: Button
-    private lateinit var btnNotification: Button
+    private lateinit var btnNotification: ImageButton // 추가
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         tabHome = findViewById(R.id.tabHome)
         tabMap = findViewById(R.id.tabMap)
         tabConsult = findViewById(R.id.tabConsult)
-        tabSetting = findViewById(R.id.tabSetting)  // ✅ tabSettings가 아니라 tabSetting
+        tabSetting = findViewById(R.id.tabSetting)
         btnSymptomInput = findViewById(R.id.btnSymptomInput)
         btnNotification = findViewById(R.id.btnNotification)
 
@@ -52,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // 설정 탭 클릭 리스너 (SettingActivity로 이동)
-        tabSetting.setOnClickListener {  // ✅ tabSetting 사용
+        tabSetting.setOnClickListener {
             val intent = Intent(this, SettingActivity::class.java)
             startActivity(intent)
         }

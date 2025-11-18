@@ -7,15 +7,14 @@
     android:padding="24dp">
 
     <!-- 뒤로가기 -->
-    <Button
+    <ImageButton
         android:id="@+id/btnBack"
-        android:layout_width="40dp"
+        android:layout_width="30dp"
         android:layout_height="40dp"
         android:paddingStart="0dp"
+        android:paddingEnd="1dp"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:text="←"
-        android:textColor="#000000"
-        android:textSize="21sp" />
+        android:src="@drawable/chevron_left_thin" />
 
     <!-- 상단 제목 영역 -->
     <LinearLayout
@@ -31,7 +30,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="앱 사용이 처음이신가요?\n회원가입이 필요해요!"
+            android:text="\n  앱 사용이 처음이신가요?\n  회원가입이 필요해요!"
             android:textSize="25sp"
             android:textStyle="bold"
             android:textColor="#000000"

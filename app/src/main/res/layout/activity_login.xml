@@ -19,22 +19,21 @@
         android:layout_marginBottom="32dp">
 
         <!-- 뒤로가기 버튼 -->
-        <Button
+        <ImageButton
             android:id="@+id/btnBack"
-            android:layout_width="40dp"
+            android:layout_width="30dp"
             android:layout_height="40dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
             android:paddingStart="0dp"
-            android:text="←"
-            android:textColor="#000000"
-            android:textSize="21sp" />
+            android:paddingEnd="1dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/chevron_left_thin" />
 
         <!-- 로그인 텍스트 (중앙) -->
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="로그인"
+            android:text="  로그인"
             android:textSize="24sp"
             android:textStyle="bold"
             android:gravity="center" />

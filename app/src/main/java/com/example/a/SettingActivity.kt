@@ -2,6 +2,7 @@ package com.example.a
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.RadioButton
 import android.widget.Toast
@@ -9,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class SettingActivity : AppCompatActivity() {
 
-    private lateinit var btnBack: Button
+    private lateinit var btnBack: ImageButton
     private lateinit var rbKorean: RadioButton
     private lateinit var rbEnglish: RadioButton
     private lateinit var llKorean: LinearLayout

@@ -12,7 +12,7 @@
     <!-- 상단 헤더 -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:paddingStart="16dp"
@@ -24,15 +24,15 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_weight="1.5" />
+            android:layout_weight="1.7" />
 
         <!-- 제목 -->
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="메인 화면"
-            android:textSize="20sp"
+            android:text="    메인 화면"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="#000000"
             android:gravity="center" />
@@ -44,16 +44,14 @@
             android:layout_weight="1" />
 
         <!-- 알림 아이콘 -->
-        <Button
+        <ImageButton
             android:id="@+id/btnNotification"
             android:layout_width="60dp"
             android:layout_height="40dp"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:text="알림"
-            android:textColor="#000000"
-            android:textSize="14sp" />
+            android:src="@drawable/bell" />
 
     </LinearLayout>
 
@@ -141,12 +139,12 @@
             android:gravity="center"
             android:background="?attr/selectableItemBackground">
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginBottom="2dp"-->
-<!--                android:text=""-->
-<!--                android:textSize="20sp" />-->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:src="@drawable/home"
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -167,12 +165,12 @@
             android:gravity="center"
             android:background="?attr/selectableItemBackground">
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text=""-->
-<!--                android:textSize="20sp"-->
-<!--                android:layout_marginBottom="2dp" />-->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/map"
+                android:textSize="20sp"
+                android:layout_marginBottom="2dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -193,12 +191,12 @@
             android:gravity="center"
             android:background="?attr/selectableItemBackground">
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text=""-->
-<!--                android:textSize="20sp"-->
-<!--                android:layout_marginBottom="2dp" />-->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/chatbot"
+                android:textSize="20sp"
+                android:layout_marginBottom="2dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -219,12 +217,12 @@
             android:gravity="center"
             android:background="?attr/selectableItemBackground">
 
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text=""-->
-<!--                android:textSize="20sp"-->
-<!--                android:layout_marginBottom="2dp" />-->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/setting"
+                android:textSize="20sp"
+                android:layout_marginBottom="2dp" />
 
             <TextView
                 android:layout_width="wrap_content"

@@ -3,6 +3,7 @@ package com.example.a
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 
 class SigninActivity : AppCompatActivity() {
@@ -10,7 +11,7 @@ class SigninActivity : AppCompatActivity() {
     private lateinit var btnSignup: Button
     private lateinit var btnGuest: Button
     private lateinit var btnLogin: Button
-    private lateinit var btnBack: Button
+    private lateinit var btnBack: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -11,13 +11,14 @@ class PermissionActivity : AppCompatActivity() {
 
     private lateinit var closeButton: Button
 
-    // 필수 권한 리스트 (위치, 카메라, 사진)
+    // 필수 권한 리스트 (위치, 카메라, 사진, 음성)
     private val requiredPermissions = arrayOf(
         android.Manifest.permission.ACCESS_FINE_LOCATION,
         android.Manifest.permission.ACCESS_COARSE_LOCATION,
         android.Manifest.permission.CAMERA,
         android.Manifest.permission.READ_EXTERNAL_STORAGE,
-        android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+        android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        android.Manifest.permission.RECORD_AUDIO
     )
 
     // 선택 권한 리스트 (알림 - Android 13 이상)

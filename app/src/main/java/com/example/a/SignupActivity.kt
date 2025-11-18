@@ -1,6 +1,7 @@
 package com.example.a
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -8,7 +9,7 @@ import android.text.TextWatcher
 import android.text.Editable
 
 class SignupActivity : AppCompatActivity() {
-    private lateinit var btnBack: Button
+    private lateinit var btnBack: ImageButton
     private lateinit var etEmail: EditText
     private lateinit var etPassword: EditText
     private lateinit var etPasswordConfirm: EditText

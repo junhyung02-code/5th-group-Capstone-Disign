@@ -11,17 +11,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="80dp"
         android:layout_marginBottom="60dp"
         android:gravity="center_vertical">
 
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/language">
+        </ImageView>
 
         <!-- 제목 텍스트 -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="  원하시는 언어를 설정해주세요!"
-            android:textSize="25sp"
+            android:text=" 원하시는 언어를 설정하세요!"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="#000000"
             android:lineSpacingMultiplier="1.4" />

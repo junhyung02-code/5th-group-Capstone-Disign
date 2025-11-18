@@ -3,6 +3,7 @@ package com.example.a
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +16,7 @@ class ResetpasswordActivity : AppCompatActivity() {
         val etNewPassword = findViewById<EditText>(R.id.etNewPassword)
         val etConfirmPassword = findViewById<EditText>(R.id.etConfirmPassword)
         val btnComplete = findViewById<Button>(R.id.btnComplete)
-        val btnBack = findViewById<Button>(R.id.btnBack)  // 추가
+        val btnBack = findViewById<ImageButton>(R.id.btnBack)  // 추가
 
         btnComplete.setOnClickListener {
             val newPw = etNewPassword.text.toString()
