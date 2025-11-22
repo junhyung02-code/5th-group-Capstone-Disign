@@ -76,7 +76,13 @@ android {
     ndkVersion rootProject.ext.ndkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
-
+sourceSets {
+        main {
+            assets.srcDirs += [
+                new File(rootProject.projectDir, "node_modules/react-native-vector-icons/Fonts")
+            ]
+        }
+    }
     namespace "com.testapp"
     defaultConfig {
         applicationId "com.testapp"
@@ -117,3 +123,4 @@ dependencies {
         implementation jscFlavor
     }
 }
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
