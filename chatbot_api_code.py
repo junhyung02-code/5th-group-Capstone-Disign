@@ -3,10 +3,15 @@ from fastapi.middleware.cors import CORSMiddleware
 import openai
 import tempfile
 from pydub import AudioSegment
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = FastAPI()
 
-openai.api_key = "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키"
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
 
 SYSTEM_PROMPT = """
 너는 병원 진료과를 추천하는 의료 조언 챗봇이다.
