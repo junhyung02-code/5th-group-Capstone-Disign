@@ -12,6 +12,15 @@ import androidx.appcompat.app.AppCompatActivity
 
 class LoginActivity : AppCompatActivity() {
 
+    override fun attachBaseContext(newBase: android.content.Context?) {
+        if (newBase != null) {
+            val contextWithLanguage = LanguageUtil.applySavedLanguage(newBase)
+            super.attachBaseContext(contextWithLanguage)
+        } else {
+            super.attachBaseContext(newBase)
+        }
+    }
+
     private lateinit var btnBack: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {

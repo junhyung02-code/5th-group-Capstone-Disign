@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:text="앱 사용을 위해\n해당 권한이 필요해요."
+            android:text="@string/permission_title"
             android:textColor="#000000"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -56,7 +56,7 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@drawable/p_n"
-                        android:contentDescription="위치 권한"
+                        android:contentDescription="@string/permission_location_desc"
                         android:scaleType="centerInside"
                         android:layout_marginEnd="16dp" />
 
@@ -70,7 +70,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="위치"
+                            android:text="@string/permission_location_title"
                             android:textColor="#000000"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -78,7 +78,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="근처 병원 및 약국 위치 안내"
+                            android:text="@string/permission_location_detail"
                             android:textColor="#999999"
                             android:textSize="18sp" />
 
@@ -98,7 +98,7 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@drawable/p_a"
-                        android:contentDescription="알림 권한"
+                        android:contentDescription="@string/permission_notification_desc"
                         android:scaleType="centerInside"
                         android:layout_marginEnd="16dp" />
 
@@ -112,7 +112,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="알림(선택)"
+                            android:text="@string/permission_notification_title"
                             android:textColor="#000000"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -120,7 +120,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="서비스 이용 안내"
+                            android:text="@string/permission_notification_detail"
                             android:textColor="#999999"
                             android:textSize="18sp" />
 
@@ -140,7 +140,7 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@drawable/p_m"
-                        android:contentDescription="음성 권한"
+                        android:contentDescription="@string/permission_voice_desc"
                         android:scaleType="centerInside"
                         android:layout_marginEnd="16dp" />
 
@@ -154,7 +154,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="음성"
+                            android:text="@string/permission_voice_title"
                             android:textColor="#000000"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -162,7 +162,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="증상 입력 시 음성 사용"
+                            android:text="@string/permission_voice_detail"
                             android:textColor="#999999"
                             android:textSize="18sp" />
 
@@ -182,7 +182,7 @@
                         android:layout_width="50dp"
                         android:layout_height="50dp"
                         android:src="@drawable/p_c"
-                        android:contentDescription="카메라 권한"
+                        android:contentDescription="@string/permission_camera_desc"
                         android:scaleType="centerInside"
                         android:layout_marginEnd="16dp" />
 
@@ -196,7 +196,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="카메라 및 사진"
+                            android:text="@string/permission_camera_title"
                             android:textColor="#000000"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -204,7 +204,7 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="증상 입력 시 이미지 첨부"
+                            android:text="@string/permission_camera_detail"
                             android:textColor="#999999"
                             android:textSize="18sp" />
 
@@ -223,7 +223,7 @@
             android:layout_height="55dp"
             android:background="@drawable/btn_border"
             android:backgroundTint="#000000"
-            android:text="확인"
+            android:text="@string/permission_confirm"
             android:textColor="#FFFFFF"
             android:textSize="20dp" />
 

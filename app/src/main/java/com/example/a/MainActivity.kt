@@ -10,6 +10,15 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
+    override fun attachBaseContext(newBase: android.content.Context?) {
+        if (newBase != null) {
+            val contextWithLanguage = LanguageUtil.applySavedLanguage(newBase)
+            super.attachBaseContext(contextWithLanguage)
+        } else {
+            super.attachBaseContext(newBase)
+        }
+    }
+
     private lateinit var tabHome: LinearLayout
     private lateinit var tabMap: LinearLayout
     private lateinit var tabConsult: LinearLayout

@@ -31,7 +31,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text=" 설정"
+            android:text=" @string/setting_title"
             android:textColor="#000000"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -52,7 +52,7 @@
 
         <!-- 언어 선택 라벨 -->
         <TextView
-            android:text="언어 설정"
+            android:text="@string/language_setting_label"
             android:textColor="#000000"
             android:textSize="18sp"
             android:textStyle="bold"
@@ -78,7 +78,7 @@
                 android:layout_marginRight="12dp" />
 
             <TextView
-                android:text="한국어 (Korean)"
+                android:text="@string/language_korean_option"
                 android:textSize="16sp"
                 android:textColor="#000000"
                 android:layout_width="0dp"
@@ -105,7 +105,7 @@
                 android:layout_marginRight="12dp" />
 
             <TextView
-                android:text="영어 (English)"
+                android:text="@string/language_english_option"
                 android:textSize="16sp"
                 android:textColor="#000000"
                 android:layout_width="0dp"

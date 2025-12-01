@@ -8,6 +8,15 @@ import androidx.appcompat.app.AppCompatActivity
 
 class SigninActivity : AppCompatActivity() {
 
+    override fun attachBaseContext(newBase: android.content.Context?) {
+        if (newBase != null) {
+            val contextWithLanguage = LanguageUtil.applySavedLanguage(newBase)
+            super.attachBaseContext(contextWithLanguage)
+        } else {
+            super.attachBaseContext(newBase)
+        }
+    }
+
     private lateinit var btnSignup: Button
     private lateinit var btnGuest: Button
     private lateinit var btnLogin: Button

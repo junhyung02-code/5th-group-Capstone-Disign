@@ -9,6 +9,15 @@ import androidx.core.app.ActivityCompat
 
 class PermissionActivity : AppCompatActivity() {
 
+    override fun attachBaseContext(newBase: android.content.Context?) {
+        if (newBase != null) {
+            val contextWithLanguage = LanguageUtil.applySavedLanguage(newBase)
+            super.attachBaseContext(contextWithLanguage)
+        } else {
+            super.attachBaseContext(newBase)
+        }
+    }
+
     private lateinit var closeButton: Button
 
     // 필수 권한 리스트 (위치, 카메라, 사진, 음성)

@@ -9,6 +9,16 @@ import android.text.TextWatcher
 import android.text.Editable
 
 class SignupActivity : AppCompatActivity() {
+
+    override fun attachBaseContext(newBase: android.content.Context?) {
+        if (newBase != null) {
+            val contextWithLanguage = LanguageUtil.applySavedLanguage(newBase)
+            super.attachBaseContext(contextWithLanguage)
+        } else {
+            super.attachBaseContext(newBase)
+        }
+    }
+
     private lateinit var btnBack: ImageButton
     private lateinit var etEmail: EditText
     private lateinit var etPassword: EditText

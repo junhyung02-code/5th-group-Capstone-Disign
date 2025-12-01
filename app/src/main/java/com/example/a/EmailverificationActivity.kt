@@ -9,6 +9,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class EmailverificationActivity : AppCompatActivity() {
+
+    override fun attachBaseContext(newBase: android.content.Context?) {
+        if (newBase != null) {
+            val contextWithLanguage = LanguageUtil.applySavedLanguage(newBase)
+            super.attachBaseContext(contextWithLanguage)
+        } else {
+            super.attachBaseContext(newBase)
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_emailverification)

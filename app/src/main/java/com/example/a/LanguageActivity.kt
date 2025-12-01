@@ -7,6 +7,14 @@ import androidx.appcompat.app.AppCompatActivity
 
 class LanguageActivity : AppCompatActivity() {
 
+    override fun attachBaseContext(newBase: android.content.Context?) {
+        if (newBase != null) {
+            val contextWithLanguage = LanguageUtil.applySavedLanguage(newBase)
+            super.attachBaseContext(contextWithLanguage)
+        } else {
+            super.attachBaseContext(newBase)
+        }
+    }
     private lateinit var btnKorean: Button
     private lateinit var btnEnglish: Button
 

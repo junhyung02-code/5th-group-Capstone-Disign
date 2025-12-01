@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="    메인 화면"
+            android:text="    @string/main_title"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="#000000"
@@ -82,7 +82,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="아픈 곳이 있으신가요?"
+                    android:text="@string/main_question_pain"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="#333333"
@@ -91,7 +91,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="AI에게 증상을 설명하면\n적합한 병원을 추천해드려요!"
+                    android:text="@string/main_ai_description"
                     android:textSize="16sp"
                     android:textColor="#000000"
                     android:gravity="center"
@@ -106,7 +106,7 @@
                 android:layout_height="80dp"
                 android:layout_marginBottom="40dp"
                 android:background="@drawable/btn_border_black"
-                android:text="증상 입력하기"
+                android:text="@string/main_symptom_input"
                 android:textColor="#FFFFFF"
                 android:textSize="23dp" />
 
@@ -149,7 +149,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="홈"
+                android:text="@string/tab_home"
                 android:textColor="#000000"
                 android:textSize="15sp" />
 
@@ -175,7 +175,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="지도"
+                android:text="@string/tab_map"
                 android:textSize="15sp"
                 android:textColor="#000000" />
 
@@ -201,7 +201,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="상담"
+                android:text="@string/tab_consult"
                 android:textSize="15sp"
                 android:textColor="#000000" />
 
@@ -227,7 +227,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="설정"
+                android:text="@string/tab_setting"
                 android:textSize="15sp"
                 android:textColor="#000000" />
 
