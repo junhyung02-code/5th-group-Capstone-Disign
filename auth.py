@@ -1,137 +1,209 @@
-# auth.py
-# 인증 관련 API 라우터
-# - 이메일 중복 확인 (GET /check-email)
-# - 회원가입 (POST /register)
-# - 로그인 (POST /login)
-# - 로그아웃 (POST /logout)
-# - 현재 사용자 정보 (GET /me)
-#
-# 세션 기반 로그인 유지 (request.session 사용)
-# 비밀번호 해시/확인은 bcrypt 라이브러리 사용
-
-from fastapi import APIRouter, Depends, Request, HTTPException
+from fastapi import APIRouter, Depends, Request, HTTPException, BackgroundTasks
 from sqlalchemy.orm import Session
+from pydantic import BaseModel, EmailStr
 from database import get_db
-from models import User
-from datetime import datetime
+from models import User, PasswordResetCode
+from smtp_utils import send_email_sync
+from datetime import datetime, timedelta
 import bcrypt
+import random
 
-router = APIRouter()
+router = APIRouter(prefix="/auth")
 
-# -----------------------------
-# 이메일 중복 확인 API
-# GET /check-email?email=...
-# 프론트에서 실시간 중복확인 용도로 사용
-# -----------------------------
+# ------------------------------
+# Pydantic Models
+# ------------------------------
+
+class RegisterRequest(BaseModel):
+    email: EmailStr
+    password: str
+
+class ChangePasswordRequest(BaseModel):
+    current_password: str
+    new_password: str
+
+class ResetPasswordRequest(BaseModel):
+    email: EmailStr
+
+class ResetPasswordConfirm(BaseModel):
+    email: EmailStr
+    code: str
+    new_password: str
+
+
+# ----------------------------------------------------
+# 이메일 중복 확인
+# ----------------------------------------------------
 @router.get("/check-email")
-def check_email(email: str, db: Session = Depends(get_db)):
-    """
-    이메일이 이미 DB에 존재하면 available=False 반환,
-    그렇지 않으면 available=True 반환.
-    """
-    existing = db.query(User).filter(User.email == email).first()
-    if existing:
-        return {"available": False, "message": "이미 사용 중인 이메일입니다."}
-    return {"available": True, "message": "사용 가능한 이메일입니다."}
+def check_email(email: EmailStr, db: Session = Depends(get_db)):
+    exists = db.query(User).filter(User.email == email).first()
+    return {
+        "available": exists is None,
+        "message": "사용 가능한 이메일입니다." if not exists else "이미 사용 중인 이메일입니다."
+    }
 
 
-# -----------------------------
+# ----------------------------------------------------
 # 회원가입
-# POST /register
-# Request form/body: email, password
-# - 이메일 중복 확인 (서버 측 최종 검증)
-# - 비밀번호는 bcrypt로 해시 저장
-# -----------------------------
+# ----------------------------------------------------
 @router.post("/register")
-def register(email: str, password: str, db: Session = Depends(get_db)):
-    # 서버 측 최종 중복 검사 (보안상 필수)
-    existing = db.query(User).filter(User.email == email).first()
-    if existing:
+def register(data: RegisterRequest, db: Session = Depends(get_db)):
+    exists = db.query(User).filter(User.email == data.email).first()
+    if exists:
         raise HTTPException(status_code=400, detail="이미 존재하는 이메일입니다.")
 
-    # 비밀번호 유효성(예: 길이 검사) - 백엔드 권장 검사
-    if len(password) < 8:
-        raise HTTPException(status_code=400, detail="비밀번호는 최소 8자 이상이어야 합니다.")
+    if len(data.password) < 8:
+        raise HTTPException(status_code=400, detail="비밀번호는 8자 이상이어야 합니다.")
 
-    # bcrypt 해싱
-    hashed_pw = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
-    hashed_pw_str = hashed_pw.decode("utf-8")
+    hashed_pw = bcrypt.hashpw(data.password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
 
-    # 사용자 생성
     user = User(
-        email=email,
-        password=hashed_pw_str
+        email=data.email,
+        password=hashed_pw
     )
 
     db.add(user)
     db.commit()
     db.refresh(user)
 
-    return {"success": True, "message": "회원가입 완료", "user_id": str(user.user_id)}
+    return {"success": True, "message": "회원가입 완료", "user_id": user.user_id}
 
 
-# -----------------------------
+# ----------------------------------------------------
 # 로그인
-# POST /login
-# Request form/body: email, password
-# - 비밀번호 검증 후 session에 user_id 저장
-# - last_login 업데이트
-# -----------------------------
+# ----------------------------------------------------
 @router.post("/login")
-def login(request: Request, email: str, password: str, db: Session = Depends(get_db)):
+def login(request: Request, email: EmailStr, password: str, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.email == email).first()
     if not user:
         raise HTTPException(status_code=401, detail="이메일 또는 비밀번호가 올바르지 않습니다.")
 
-    # 비밀번호 검증 (bcrypt)
     if not bcrypt.checkpw(password.encode("utf-8"), user.password.encode("utf-8")):
         raise HTTPException(status_code=401, detail="이메일 또는 비밀번호가 올바르지 않습니다.")
 
-    # 로그인 성공: 세션에 사용자 정보 저장
-    request.session["user_id"] = str(user.user_id)
+    request.session["user_id"] = user.user_id
     request.session["email"] = user.email
 
-    # last_login 업데이트 (UTC)
     user.last_login = datetime.utcnow()
     db.commit()
 
     return {"success": True, "message": "로그인 성공"}
 
 
-# -----------------------------
+# ----------------------------------------------------
 # 로그아웃
-# POST /logout
-# - 세션 삭제 (POST 권장)
-# -----------------------------
+# ----------------------------------------------------
 @router.post("/logout")
 def logout(request: Request):
-    # 세션 초기화
     request.session.clear()
     return {"success": True, "message": "로그아웃 완료"}
 
 
-# -----------------------------
-# 현재 로그인 사용자 정보 조회
-# GET /me
-# -----------------------------
+# ----------------------------------------------------
+# 현재 로그인 사용자 정보
+# ----------------------------------------------------
 @router.get("/me")
 def me(request: Request, db: Session = Depends(get_db)):
     user_id = request.session.get("user_id")
     if not user_id:
-        raise HTTPException(status_code=401, detail="로그인 필요")
+        raise HTTPException(status_code=401, detail="로그인이 필요합니다.")
 
     user = db.query(User).filter(User.user_id == user_id).first()
     if not user:
-        # 세션에 남아있지만 DB에 없는 경우 세션 정리
         request.session.clear()
         raise HTTPException(status_code=401, detail="유효하지 않은 사용자")
 
-    # 안전을 위해 비밀번호는 반환하지 않음
     return {
-        "user_id": str(user.user_id),
+        "user_id": user.user_id,
         "email": user.email,
         "role": user.role,
         "is_active": user.is_active,
         "last_login": user.last_login,
         "created_at": user.created_at
     }
+
+
+# ----------------------------------------------------
+# 비밀번호 변경 (로그인 상태)
+# ----------------------------------------------------
+@router.post("/change-password")
+def change_password(request: Request, data: ChangePasswordRequest, db: Session = Depends(get_db)):
+    user_id = request.session.get("user_id")
+    if not user_id:
+        raise HTTPException(status_code=401, detail="로그인이 필요합니다.")
+
+    user = db.query(User).filter(User.user_id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="사용자를 찾을 수 없습니다.")
+
+    if not bcrypt.checkpw(data.current_password.encode(), user.password.encode()):
+        raise HTTPException(status_code=400, detail="현재 비밀번호가 일치하지 않습니다.")
+
+    if len(data.new_password) < 8:
+        raise HTTPException(status_code=400, detail="새 비밀번호는 8자 이상이어야 합니다.")
+
+    hashed_pw = bcrypt.hashpw(data.new_password.encode(), bcrypt.gensalt()).decode("utf-8")
+    user.password = hashed_pw
+    db.commit()
+
+    return {"success": True, "message": "비밀번호가 변경되었습니다."}
+
+
+# ----------------------------------------------------
+# 비밀번호 찾기 - 인증코드 요청
+# ----------------------------------------------------
+@router.post("/password-reset/request")
+def password_reset_request(data: ResetPasswordRequest, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.email == data.email).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="등록되지 않은 이메일입니다.")
+
+    code = str(random.randint(100000, 999999))
+    expires = datetime.utcnow() + timedelta(minutes=5)
+
+    entry = PasswordResetCode(email=data.email, code=code, expires_at=expires)
+    db.add(entry)
+    db.commit()
+
+    background_tasks.add_task(
+        send_email_sync,
+        data.email,
+        "[서비스명] 비밀번호 재설정 인증코드",
+        f"인증코드: {code}\n5분 내에 입력하세요."
+    )
+
+    return {"success": True, "message": "인증코드가 이메일로 발송되었습니다."}
+
+
+# ----------------------------------------------------
+# 비밀번호 찾기 - 인증코드 확인 + 비밀번호 재설정
+# ----------------------------------------------------
+@router.post("/password-reset/confirm")
+def password_reset_confirm(data: ResetPasswordConfirm, db: Session = Depends(get_db)):
+    record = (
+        db.query(PasswordResetCode)
+        .filter(PasswordResetCode.email == data.email, PasswordResetCode.code == data.code)
+        .order_by(PasswordResetCode.created_at.desc())
+        .first()
+    )
+
+    if not record:
+        raise HTTPException(status_code=400, detail="잘못된 인증코드입니다.")
+
+    if record.expires_at < datetime.utcnow():
+        raise HTTPException(status_code=400, detail="인증코드가 만료되었습니다.")
+
+    user = db.query(User).filter(User.email == data.email).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="사용자를 찾을 수 없습니다.")
+
+    if len(data.new_password) < 8:
+        raise HTTPException(status_code=400, detail="비밀번호는 8자 이상이어야 합니다.")
+
+    hashed_pw = bcrypt.hashpw(data.new_password.encode(), bcrypt.gensalt()).decode("utf-8")
+    user.password = hashed_pw
+
+    db.delete(record)
+    db.commit()
+
+    return {"success": True, "message": "비밀번호가 성공적으로 재설정되었습니다."}
