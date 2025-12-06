@@ -103,7 +103,7 @@ app.add_middleware(
 
 def get_chat_response(user_text):
     response = openai.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-4o",
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user", "content": user_text}
@@ -149,5 +149,6 @@ async def predict_audio(file: UploadFile = File(...)):
     text = speech_to_text(temp_path)
     result = get_chat_response(text)
     return {"result": result}
+
 
 
