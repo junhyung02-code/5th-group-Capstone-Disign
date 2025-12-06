@@ -11,7 +11,7 @@ import {
   Platform,
 } from 'react-native';
 
-function TextInputScreen({ navigation }) {
+function TextInputScreen({ navigation }) { 
   // 1. 증상 텍스트를 저장할 변수
   const [symptomText, setSymptomText] = useState('');
 
@@ -26,10 +26,10 @@ function TextInputScreen({ navigation }) {
           <Text style={styles.backButton}>{'<'}</Text>
         </TouchableOpacity>
       </View>
-
+      
       {/* 4. 키보드가 화면을 가리지 않도록 설정 */}
       <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
         style={styles.keyboardAvoidingContainer}
       >
         <Text style={styles.title}>
@@ -48,27 +48,26 @@ function TextInputScreen({ navigation }) {
           onChangeText={setSymptomText}
           textAlignVertical="top" // 안드로이드에서 텍스트가 위에서부터 시작하도록
         />
-
+        
         {/* '다음' 버튼을 화면 하단에 고정하기 위한 빈 공간 */}
-        <View style={{ flex: 1 }} />
+        <View style={{ flex: 1 }} /> 
+
       </KeyboardAvoidingView>
 
       {/* 6. '다음' 버튼 (하단 고정) */}
       <View style={styles.footer}>
-        <TouchableOpacity
+        <TouchableOpacity 
           style={[
             styles.nextButton,
-            !isEnabled && styles.nextButtonDisabled, // 비활성화 스타일
+            !isEnabled && styles.nextButtonDisabled // 비활성화 스타일
           ]}
           disabled={!isEnabled} // 비활성화
           onPress={() => navigation.navigate('Loading')} // 로딩 화면으로 이동
         >
-          <Text
-            style={[
-              styles.nextButtonText,
-              !isEnabled && styles.nextButtonTextDisabled, // 비활성화 텍스트 스타일
-            ]}
-          >
+          <Text style={[
+            styles.nextButtonText,
+            !isEnabled && styles.nextButtonTextDisabled // 비활성화 텍스트 스타일
+          ]}>
             다음
           </Text>
         </TouchableOpacity>
@@ -79,8 +78,8 @@ function TextInputScreen({ navigation }) {
 
 // 7. 피그마 디자인을 반영한 전체 스타일
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  container: { 
+    flex: 1, 
     backgroundColor: '#FAFAFA', // 피그마의 밝은 배경색
   },
   header: {
@@ -96,9 +95,9 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
   },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
+  title: { 
+    fontSize: 24, 
+    fontWeight: 'bold', 
     marginBottom: 30,
     lineHeight: 34,
   },
@@ -106,37 +105,35 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 250, // 입력창 높이
     backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#EFEFEF',
+    borderWidth: 1, 
+    borderColor: '#EFEFEF', 
     borderRadius: 15, // 둥근 모서리
     padding: 20, // 내부 여백
     fontSize: 16,
     lineHeight: 24,
   },
-  footer: {
-    // '다음' 버튼을 하단에 고정하기 위한 영역
+  footer: { // '다음' 버튼을 하단에 고정하기 위한 영역
     padding: 20,
   },
-  nextButton: {
-    width: '100%',
-    height: 55,
+  nextButton: { 
+    width: '100%', 
+    height: 55, 
     backgroundColor: '#007AFF', // 활성화 (파란색)
-    borderRadius: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
+    borderRadius: 10, 
+    justifyContent: 'center', 
+    alignItems: 'center', 
   },
-  nextButtonText: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: 'bold',
+  nextButtonText: { 
+    color: '#FFFFFF', 
+    fontSize: 18, 
+    fontWeight: 'bold' 
   },
-  nextButtonDisabled: {
-    // 비활성화 (회색)
+  nextButtonDisabled: { // 비활성화 (회색)
     backgroundColor: '#F5F5F5',
     borderWidth: 1,
     borderColor: '#E0E0E0',
   },
-  nextButtonTextDisabled: {
+  nextButtonTextDisabled: { 
     color: '#9E9E9E',
   },
 });
