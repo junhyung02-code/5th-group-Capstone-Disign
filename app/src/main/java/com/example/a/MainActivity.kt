@@ -22,11 +22,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var tabHome: LinearLayout
     private lateinit var tabMap: LinearLayout
     private lateinit var tabConsult: LinearLayout
-    private lateinit var tabSetting: LinearLayout  // 변수명 일관성
+    private lateinit var tabSetting: LinearLayout
     private lateinit var btnSymptomInput: Button
-    private lateinit var btnNotification: ImageButton // 추가
-
-
+    private lateinit var btnNotification: ImageButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,9 +38,10 @@ class MainActivity : AppCompatActivity() {
         btnSymptomInput = findViewById(R.id.btnSymptomInput)
         btnNotification = findViewById(R.id.btnNotification)
 
-        // 증상 입력하기 버튼
+        // 증상 입력하기 버튼 (InputActivity로 이동)
         btnSymptomInput.setOnClickListener {
-            Toast.makeText(this, "증상 입력 화면으로 이동합니다.", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, InputActivity::class.java)
+            startActivity(intent)
         }
 
         // 알림 버튼
