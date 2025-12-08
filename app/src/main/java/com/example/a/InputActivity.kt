@@ -90,6 +90,7 @@ class InputActivity : AppCompatActivity() {
         ivTextIcon.setColorFilter(ContextCompat.getColor(this, android.R.color.black))
         tvTextLabel.setTextColor(ContextCompat.getColor(this, android.R.color.black))
 
+        // 음성 입력 비선택 상태 (흰색)
         btnVoiceInput.setBackgroundResource(R.drawable.btn_border)
         ivVoiceIcon.clearColorFilter()
         tvVoiceLabel.setTextColor(ContextCompat.getColor(this, android.R.color.black))
