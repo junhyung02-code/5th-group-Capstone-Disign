@@ -28,7 +28,7 @@
             android:paddingEnd="1dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/chevron_left_thin"
-            android:contentDescription="뒤로가기" />
+            android:contentDescription="@string/back" />
 
     </LinearLayout>
 
@@ -51,7 +51,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="어떤 증상이 있으신지\n구체적으로 말씀해주세요!"
+                android:text="@string/voice_title"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="#000000"
@@ -67,7 +67,7 @@
                 android:background="@drawable/record"
                 android:scaleType="centerInside"
                 android:padding="20dp"
-                android:contentDescription="마이크"
+                android:contentDescription="@string/voice_mic"
                 android:layout_marginBottom="30dp" />
 
             <!-- 녹음 시간 표시 -->
@@ -99,7 +99,7 @@
                     android:textSize="20sp"
                     android:textColor="#ffffff"
                     android:background="@drawable/btn_border"
-                    android:contentDescription="중지"
+                    android:contentDescription="@string/voice_stop"
                     android:layout_marginEnd="20dp"
                     android:enabled="false" />
 
@@ -113,7 +113,7 @@
                     android:textSize="20sp"
                     android:textColor="#ffffff"
                     android:background="@drawable/btn_border"
-                    android:contentDescription="재생"
+                    android:contentDescription="@string/voice_play"
                     android:layout_marginEnd="20dp"
                     android:enabled="false" />
 
@@ -127,7 +127,7 @@
                     android:textSize="20sp"
                     android:textColor="#ffffff"
                     android:background="@drawable/btn_border"
-                    android:contentDescription="삭제"
+                    android:contentDescription="@string/voice_delete"
                     android:enabled="false" />
 
             </LinearLayout>
@@ -136,7 +136,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="마이크 버튼을 클릭하면\n녹음이 시작되고 다시 하면 저장됩니다!"
+                android:text="@string/voice_guide"
                 android:textSize="18sp"
                 android:textColor="#000000"
                 android:lineSpacingExtra="5dp"
@@ -161,7 +161,7 @@
             android:id="@+id/btnNext"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="다음"
+            android:text="@string/next"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
