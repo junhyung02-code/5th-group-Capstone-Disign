@@ -60,7 +60,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
                 android:background="#FFFFFF"
-                android:hint="증상을 입력해주세요!"
+                android:hint="증상을 입력해주세요!\nex)52살, 남자\n어제 아침부터 두통과 이명이 심해요.\n일어나서 움직일 때 더 심해져요."
                 android:textColorHint="#BDBDBD"
                 android:textColor="#000000"
                 android:textSize="17sp"
