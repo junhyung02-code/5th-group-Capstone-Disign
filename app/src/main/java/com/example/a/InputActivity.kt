@@ -52,6 +52,11 @@ class InputActivity : AppCompatActivity() {
             finish()
         }
 
+        // 초기 상태: 모든 버튼 흰색으로 설정
+        btnTextInput.setBackgroundResource(R.drawable.btn_input_unselected)
+        btnVoiceInput.setBackgroundResource(R.drawable.btn_input_unselected)
+        selectedInputType = ""
+
         // 텍스트 입력 선택
         btnTextInput.setOnClickListener {
             selectedInputType = "text"
@@ -86,26 +91,27 @@ class InputActivity : AppCompatActivity() {
     // 텍스트 입력 선택 상태 (전체 블록 회색)
     private fun selectTextInput() {
         // 텍스트 입력 선택 표시 (회색 배경)
-        btnTextInput.setBackgroundColor(ContextCompat.getColor(this, android.R.color.darker_gray))
+        // 텍스트 입력 선택 (회색 배경 + 둥근 테두리)
+        btnTextInput.setBackgroundResource(R.drawable.btn_input_selected)
         ivTextIcon.setColorFilter(ContextCompat.getColor(this, android.R.color.black))
         tvTextLabel.setTextColor(ContextCompat.getColor(this, android.R.color.black))
 
-        // 음성 입력 비선택 상태 (흰색)
-        btnVoiceInput.setBackgroundResource(R.drawable.btn_border)
+        // 음성 입력 비선택 (흰색 배경 + 둥근 테두리)
+        btnVoiceInput.setBackgroundResource(R.drawable.btn_input_unselected)
         ivVoiceIcon.clearColorFilter()
         tvVoiceLabel.setTextColor(ContextCompat.getColor(this, android.R.color.black))
     }
 
     // 음성 입력 선택 상태 (전체 블록 회색)
     private fun selectVoiceInput() {
-        // 음성 입력 선택 표시 (회색 배경)
-        btnVoiceInput.setBackgroundColor(ContextCompat.getColor(this, android.R.color.darker_gray))
+        // 음성 입력 선택 (회색 배경 + 둥근 테두리)
+        btnVoiceInput.setBackgroundResource(R.drawable.btn_input_selected)
         ivVoiceIcon.setColorFilter(ContextCompat.getColor(this, android.R.color.black))
         tvVoiceLabel.setTextColor(ContextCompat.getColor(this, android.R.color.black))
 
-        // 텍스트 입력 비선택 상태 (흰색)
-        btnTextInput.setBackgroundResource(R.drawable.btn_border)
+        // 텍스트 입력 비선택 (흰색 배경 + 둥근 테두리)
+        btnTextInput.setBackgroundResource(R.drawable.btn_input_unselected)
         ivTextIcon.clearColorFilter()
         tvTextLabel.setTextColor(ContextCompat.getColor(this, android.R.color.black))
     }
-}
+    }
