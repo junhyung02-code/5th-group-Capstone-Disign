@@ -94,7 +94,7 @@
     <!-- 첫 화면 -->
     <string name="onboarding_title">
         <![CDATA[
-  First time using the app?
+  First time using the app?\n
   Please sign up!
         ]]>
     </string>
