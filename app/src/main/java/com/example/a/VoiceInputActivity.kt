@@ -108,6 +108,12 @@ class VoiceInputActivity : AppCompatActivity() {
         // 다음 버튼
         btnNext.setOnClickListener {
             if (recordingFile != null && recordingFile!!.exists()) {
+
+                // Loading UI
+                val loadingIntent = Intent(this, LoadingActivity::class.java)
+                loadingIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+                startActivity(loadingIntent)
+
                 uploadAudio(recordingFile!!)
             } else {
                 Toast.makeText(this, "먼저 음성을 녹음해주세요.", Toast.LENGTH_SHORT).show()

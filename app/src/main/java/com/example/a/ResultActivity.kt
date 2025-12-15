@@ -70,13 +70,8 @@ class ResultActivity : AppCompatActivity() {
 
         // 6. 뒤로가기
         btnBack.setOnClickListener {
-            if (sourceActivity == "VoiceInputActivity") {
-                intent = Intent(this, VoiceInputActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            } else if(sourceActivity == "TextInputActivity"){
-                intent = Intent(this, TextInputActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            }
+            val intent = Intent(this, InputActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
             finish()
         }

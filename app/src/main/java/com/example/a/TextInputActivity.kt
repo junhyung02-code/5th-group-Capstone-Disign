@@ -9,6 +9,8 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Handler
+import android.os.Looper
 
 import com.example.a.model.AnalyzeResponse
 import com.example.a.model.TextRequest
@@ -72,15 +74,21 @@ class TextInputActivity : AppCompatActivity() {
         // 다음 버튼
         btnNext.setOnClickListener {
             val text = symptomText.trim()
-            if (text.isNotEmpty()) {
-                val loadingIntent = Intent(this, LoadingActivity::class.java)
-                startActivity(loadingIntent)
 
-                sendSymptomText(text)
-
-            } else {
+            if (text.isEmpty()) {
                 Toast.makeText(this, "증상을 입력해주세요.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
+
+            // 로딩 화면 표시 (UI 전용)
+            val loadingIntent = Intent(this, LoadingActivity::class.java)
+            loadingIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+            startActivity(loadingIntent)
+
+            //3초 딜레이 이후 API 호출
+            Handler(Looper.getMainLooper()).postDelayed({
+                sendSymptomText(text)
+            }, 3000)
         }
     }
 
@@ -88,23 +96,43 @@ class TextInputActivity : AppCompatActivity() {
         val request = TextRequest(text)
 
         apiService.analyzeUsingText(request).enqueue(object : Callback<AnalyzeResponse> {
-            override fun onResponse(call: Call<AnalyzeResponse>, response: Response<AnalyzeResponse>) {
-                if (response.isSuccessful) {
-                    val chatResult = response.body()?.result
-                    if (!chatResult.isNullOrEmpty()) {
-                        val resultIntent = Intent(this@TextInputActivity, ResultActivity::class.java)
-                        resultIntent.putExtra("chat_result", chatResult)
-                        resultIntent.putExtra("source_activity", "TextInputActivity")
-
-                        resultIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        startActivity(resultIntent)
-                        finish()
-                    } else {
-                        Toast.makeText(this@TextInputActivity, "응답 오류.", Toast.LENGTH_LONG).show()
-                    }
-                } else {
-                    Toast.makeText(this@TextInputActivity, "서버 요청 실패: ${response.code()}", Toast.LENGTH_LONG).show()
+            override fun onResponse(
+                call: Call<AnalyzeResponse>,
+                response: Response<AnalyzeResponse>
+            ) {
+                if (!response.isSuccessful) {
+                    Toast.makeText(
+                        this@TextInputActivity,
+                        "서버 요청 실패: ${response.code()}",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    return
                 }
+
+                val chatResult = response.body()?.result
+
+                if (chatResult.isNullOrEmpty()) {
+                    Toast.makeText(
+                        this@TextInputActivity,
+                        "응답 오류.",
+                        Toast.LENGTH_LONG
+                    ).show()
+                    return
+                }
+
+                // 결과 화면으로 이동
+                val resultIntent =
+                    Intent(this@TextInputActivity, ResultActivity::class.java)
+
+                resultIntent.putExtra("chat_result", chatResult)
+                resultIntent.putExtra("source_activity", "TextInputActivity")
+                resultIntent.addFlags(
+                    Intent.FLAG_ACTIVITY_CLEAR_TOP or
+                            Intent.FLAG_ACTIVITY_SINGLE_TOP
+                )
+
+                startActivity(resultIntent)
+                finish()
             }
 
             override fun onFailure(call: Call<AnalyzeResponse>, t: Throwable) {
