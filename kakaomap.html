@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body, html { margin: 0; padding: 0; width: 100%; height: 100%; }
+        #map { width: 100%; height: 100%; }
+        /* 마커 클릭 시 정보창 스타일 */
+        .wrap { padding: 5px; font-size: 12px; width: 150px; }
+        .title { font-weight: bold; margin-bottom: 3px; border-bottom: 1px solid #ddd;}
+    </style>
+</head>
+<body>
+<div id="map"></div>
+
+<script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=d0a8a89e743954aae048a07224b60d63&libraries=services"></script>
+
+<script>
+    var mapContainer = document.getElementById('map');
+    var mapOption = {
+        center: new kakao.maps.LatLng(35.858485, 128.486586), // 계명대
+        level: 4
+    };
+    var map = new kakao.maps.Map(mapContainer, mapOption);
+
+    var ps = new kakao.maps.services.Places();
+    var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+    var markers = [];
+
+    function moveAndSearch(lat, lng, keyword) {
+        var locPosition = new kakao.maps.LatLng(lat, lng);
+        map.setCenter(locPosition);
+
+        // 마커 초기화
+        for (var i = 0; i < markers.length; i++) { markers[i].setMap(null); }
+        markers = [];
+
+        // 검색 옵션 (반경 3km)
+        var options = { location: locPosition, radius: 3000 };
+
+        // 검색 실행
+        ps.keywordSearch(keyword, function(data, status, pagination) {
+            if (status === kakao.maps.services.Status.OK) {
+                for (var i=0; i<data.length; i++) {
+                    displayMarker(data[i]);
+                }
+            } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
+                alert("검색 결과가 없습니다: " + keyword);
+            } else if (status === kakao.maps.services.Status.ERROR) {
+                alert("검색 에러! 도메인 설정(http://localhost)을 확인하세요.");
+            }
+        }, options);
+    }
+
+    function displayMarker(place) {
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: new kakao.maps.LatLng(place.y, place.x)
+        });
+        markers.push(marker);
+
+        kakao.maps.event.addListener(marker, 'click', function() {
+            var content = '<div class="wrap"><div class="title">' + place.place_name + '</div>' +
+                          '<div>' + (place.road_address_name || place.address_name) + '</div>' +
+                          '<div style="color:green;">' + (place.phone || "") + '</div></div>';
+            infowindow.setContent(content);
+            infowindow.open(map, marker);
+        });
+    }
+</script>
+</body>
+</html>
